@@ -1,0 +1,144 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cbuilder</title>
+    <style>
+        body{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            background-color: aliceblue;
+        }
+        .left{
+            background-color: white;
+            width:40%;
+            height:90%;
+            float:left;
+        }
+        .right{
+            background-color: white;
+            width:40%;
+            height:90%;
+            float: right;
+            
+        }
+        textarea{
+            width:100%;
+            height:100%;
+        }
+        button{
+            border-style:solid;
+            font-size:medium;
+        }
+        button:hover{
+            background-color: rgb(119, 118, 118);
+        }
+    </style>
+    <script>
+        function dplay(){
+            let text = document.getElementById('text').value;
+            document.getElementById('code').value += `cout << "${text}" << endl;\n`;
+        }
+        function varint(){
+            let name = document.getElementById('nameint').value;
+            document.getElementById('code').value += `int ${name};\n`;
+        }
+        function dvar(){
+            let varr = document.getElementById('namedis').value;
+            document.getElementById('code').value +=  `cout << ${varr} << endl;\n`;
+        }
+        function varstring(){
+            let name = document.getElementById('namestring').value;
+            document.getElementById('code').value += `string ${name};\n`;
+        }
+        function setvarstr(){
+            let name = document.getElementById('setvarname').value;
+            let value = document.getElementById('setvalue').value;
+            document.getElementById('code').value += `${name} = "${value}";\n`;
+        }
+        function setvarnum(){
+            let name = document.getElementById('setvarnamenum').value;
+            let value = document.getElementById('setvaluenum').value;
+            document.getElementById('code').value += `${name} = ${value};\n`;
+        }
+        function setvarnu(){
+            let name = document.getElementById('setvarnamenu').value;
+            let value = document.getElementById('setvaluenu').value;
+            document.getElementById('code').value += `${name} = ${value};\n`;
+        }
+        function seteq(){
+            let name = document.getElementById('matha').value;
+            let value = document.getElementById('mathb').value;
+            document.getElementById('code').value += `${name} = ${value};\n`;
+        }
+        function ask(){
+            let varr = document.getElementById('varsave').value;
+            document.getElementById('code').value += `cin >> ${varr};\n`;
+        }
+        function ifstart(){
+            let statement = document.getElementById('statement').value;
+            document.getElementById('code').value += `if (${statement}){\n`;
+        }
+        function ifend(){
+            document.getElementById('code').value += "}\n";
+        }
+        function elseend(){
+            document.getElementById('code').value += "else {\n";
+        }
+        function ifelsestart(){
+            let statement = document.getElementById('statementelse').value;
+            document.getElementById('code').value += `else if (${statement}){\n`;
+        }
+        function rannd(){
+            let name = document.getElementById('randname').value;
+            let max = document.getElementById('maxnum').value;
+            document.getElementById('code').value += `${name} = rand() % ${parseInt(max)+1};\n// Dont worry about the number being 1 bigger , its max number is ${max}\n`;
+        }
+        function whilestart(){
+            let statement = document.getElementById('whilestatement').value;
+            document.getElementById('code').value += `while (${statement}) {\n`;
+        }
+        function build(){
+            let code = document.getElementById('code').value;
+            document.getElementById('code').value = `#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+${code}
+    return 0;
+}`;
+alert("You will not be able to edit the code with cbuilder now!")
+        }
+    </script>
+</head>
+<body>
+    <center><h1>Cbuilder</h1></center>
+    <center>
+    <div class="left">
+        <button onclick="dplay()">Display text</button><input id="text" type="text" placeholder="Text to display"/><br>
+        <button onclick="varint()">Create a number variable</button><input id="nameint" placeholder="Name of variable"/><br>
+        <button onclick="varstring()">Create a string variable</button><input id="namestring" placeholder="Name of variable"/><br>
+        <button onclick="dvar()">Display variable</button><input id="namedis" placeholder="Name of variable"/><br>
+        <button onclick="setvarstr()">Set a variable to string</button><input id="setvarname" placeholder="Name of variable"/><input id="setvalue" placeholder="value"/><br>
+        <button onclick="setvarnum()">Set a variable to a number</button><input id="setvarnamenum" placeholder="Name of variable"/><input id="setvaluenum" placeholder="value"/><br>
+        <button onclick="setvarnu()">Set a variable to another variable</button><input id="setvarnamenu" placeholder="Name of variable"/><input id="setvaluenu" placeholder="another variable"/><br>
+        <button onclick="seteq()">Set a variable to a math equation</button><input id="matha" placeholder="Name of variable"/><input id="mathb" placeholder="equation"/><p style="font-size:small;">For ex. variable1*10 or 3/4 feel free to mix numbers and variables in the equation</p>
+        <button onclick="ask()">Ask for a value</button><input id="varsave" style="width:60%;" type="text" placeholder="Variable to which save the answer"/><br>
+        <button onclick="ifstart()">Start a if statement</button><input id="statement" placeholder="Valid c++ statement"/><br>
+        <button onclick="ifend()">End a if/else/while statement</button><button onclick="elseend()">Add a else</button><br>
+        <button onclick="ifelsestart()">Start a else if statement</button><input id="statementelse" placeholder="Valid c++ statement"/><br>
+        <p style="font-size:small;">Make sure so the ending brackets match count them!</p>
+        <button style="font-size:small;" onclick="rannd()">Assign a random number to variable</button><input id="randname" type="text" placeholder="Name of variable"/><input id="maxnum" type="text" placeholder="Max number"/><br>
+        <button onclick="whilestart()">Start a while statement</button><input id="whilestatement" placeholder="Valid c++ statement"/><br>
+    </div>
+    <button onclick="build()">Make the script usable</button>
+    <div class="right" >
+       <textarea id="code"></textarea>
+    </div>
+
+    </center>
+    
+    
+</body>
+</html>
